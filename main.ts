@@ -33,6 +33,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite, location) {
     tiles.placeOnTile(mySprite, checkpoint)
 })
+let location: tiles.Location = null
 let max_jump = 0
 let jump = 0
 let checkpoint: tiles.Location = null
@@ -53,8 +54,24 @@ scene.setBackgroundColor(12)
 tiles.setCurrentTilemap(tilemap`level2`)
 checkpoint = tiles.getTileLocation(0, 198)
 tiles.placeOnTile(mySprite, checkpoint)
-mySprite.ay = 200
-scene.cameraFollowSprite(mySprite)
 controller.moveSprite(mySprite, 100, 0)
 jump = 0
 max_jump = 2
+scene.cameraFollowSprite(mySprite)
+mySprite.ay = 200
+game.onUpdate(function () {
+	
+})
+forever(function () {
+    location = mySprite.tilemapLocation()
+})
+forever(function () {
+    if (mySprite.tileKindAt(TileDirection.Bottom, assets.tile`myTile20`)) {
+        tiles.setWallAt(location.getNeighboringLocation(CollisionDirection.Bottom), true)
+    } else {
+        tiles.setWallAt(location.getNeighboringLocation(CollisionDirection.Top), false)
+    }
+})
+forever(function () {
+    mySprite.setFlag(SpriteFlag.ShowPhysics, true)
+})
