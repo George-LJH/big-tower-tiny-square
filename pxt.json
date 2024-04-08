@@ -5,7 +5,10 @@
     "dependencies": {
         "device": "*",
         "arcade-tile-util": "github:microsoft/arcade-tile-util#v1.2.0",
-        "tilemaps": "github:microsoft/pxt-tilemaps#v1.12.0"
+        "tilemaps": "github:microsoft/pxt-tilemaps#v1.12.0",
+        "pxt-button-combos": "github:jwunderl/pxt-button-combos#v0.0.24",
+        "pxt-countup": "github:shakao/pxt-countup#v0.0.2",
+        "controller": "*"
     },
     "files": [
         "main.blocks",

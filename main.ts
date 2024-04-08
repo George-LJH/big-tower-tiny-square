@@ -12,6 +12,9 @@ scene.onHitWall(SpriteKind.Player, function (sprite, location) {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
     tiles.placeOnTile(mySprite, checkpoint)
 })
+controller.anyButton.onEvent(ControllerButtonEvent.Pressed, function () {
+    info.startCountup(false)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (jump < max_jump) {
         jump += 1
@@ -66,12 +69,15 @@ forever(function () {
     location = mySprite.tilemapLocation()
 })
 forever(function () {
-    if (mySprite.tileKindAt(TileDirection.Bottom, assets.tile`myTile20`)) {
-        tiles.setWallAt(location.getNeighboringLocation(CollisionDirection.Bottom), true)
-    } else {
+    if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile20`)) {
         tiles.setWallAt(location.getNeighboringLocation(CollisionDirection.Top), false)
     }
 })
 forever(function () {
-    mySprite.setFlag(SpriteFlag.ShowPhysics, true)
+    if (mySprite.tileKindAt(TileDirection.Bottom, assets.tile`myTile20`)) {
+        tiles.setWallAt(location.getNeighboringLocation(CollisionDirection.Bottom), true)
+    }
+})
+forever(function () {
+    info.setScore(info.getTimeElapsed())
 })
